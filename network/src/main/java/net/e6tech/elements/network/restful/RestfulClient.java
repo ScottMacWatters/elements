@@ -309,7 +309,7 @@ public class RestfulClient {
                 OutputStream out = conn.getOutputStream();
                 if (data != null) {
                     Writer writer = new OutputStreamWriter(new BufferedOutputStream(out), "UTF-8");
-                    String posted = mapper.writeValueAsString(data);
+                    String posted = (data instanceof String) ? (String) data : mapper.writeValueAsString(data);
                     writer.write(posted);
                     logger.debug(posted);
                     writer.flush();
